@@ -16,7 +16,7 @@ void setup() {
   size(800, 600);
   gameWorld = new GameWorld(this);
   
-  gameWorld.box2d.setGravity(0, -20);
+  gameWorld.box2d.setGravity(0, -40);
   
   buildArena(gameWorld);
   initializeControl(gameWorld);

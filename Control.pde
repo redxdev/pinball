@@ -32,8 +32,8 @@ void initializeControl(GameWorld world) {
   bd.allowSleep = false;
   
   fd = new FixtureDef();
-  fd.friction = 0.3;
-  fd.density = 0.3;
+  fd.friction = 0.1;
+  fd.density = 1.0;
   
   ball = new CircleObject(world, 30, bd, fd);
   world.addObject(ball);
@@ -53,7 +53,7 @@ void initializeControl(GameWorld world) {
   gameWorld.addObject(obj);
   
   bd = new BodyDef(); // left paddle
-  bd.position.set(gameWorld.box2d.coordPixelsToWorld(180, height - 100));
+  bd.position.set(gameWorld.box2d.coordPixelsToWorld(200, height - 100));
   bd.fixedRotation = false;
   bd.bullet = true;
   bd.type = BodyType.DYNAMIC;
@@ -93,7 +93,7 @@ void initializeControl(GameWorld world) {
   gameWorld.addObject(obj);
   
   bd = new BodyDef(); // right paddle
-  bd.position.set(gameWorld.box2d.coordPixelsToWorld(width - 280, height - 100));
+  bd.position.set(gameWorld.box2d.coordPixelsToWorld(width - 300, height - 100));
   bd.fixedRotation = false;
   bd.bullet = true;
   bd.type = BodyType.DYNAMIC;
@@ -110,9 +110,9 @@ void initializeControl(GameWorld world) {
   rjPos = rightPaddle.body.getWorldCenter();
   rjPos.x += 10;
   rjd.initialize(rightPaddle.body, obj.body, rjPos);
-  rjd.enableLimit = false;
-  rjd.lowerAngle = PI;
-  rjd.upperAngle = PI;
+  rjd.enableLimit = true;
+  rjd.lowerAngle = -PI / 8;
+  rjd.upperAngle = PI / 8;
   rjd.motorSpeed = -PI * 7;
   rjd.maxMotorTorque = 999999;
   rjd.enableMotor = true;
@@ -134,7 +134,7 @@ void updateControl(GameWorld world) {
       plunger.body.setLinearVelocity(new Vec2(0, 0));
     }
     else {
-      plunger.body.setLinearVelocity(new Vec2(0, 70));
+      plunger.body.setLinearVelocity(new Vec2(0, 150));
     }
   }
 }
@@ -145,6 +145,9 @@ void keyPressed() {
   else if(keyCode == LEFT) {
     leftJoint.setMotorSpeed(-PI * 7);
   }
+  else if(keyCode == RIGHT) {
+    rightJoint.setMotorSpeed(PI * 7);
+  }
 }
 
 void keyReleased() {
@@ -153,5 +156,8 @@ void keyReleased() {
   }
   else if(keyCode == LEFT) {
     leftJoint.setMotorSpeed(PI * 7);
+  }
+  else if(keyCode == RIGHT) {
+    rightJoint.setMotorSpeed(-PI * 7);
   }
 }

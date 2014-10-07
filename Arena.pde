@@ -40,20 +40,6 @@ void buildArena(GameWorld gameWorld) {
   obj = new RectangleObject(gameWorld, 20, height, bd, fd);
   gameWorld.addObject(obj);
   
-  bd = new BodyDef(); // bottom right edge
-  bd.position.set(gameWorld.box2d.coordPixelsToWorld(width - 227, height - 70));
-  bd.fixedRotation = true;
-  bd.bullet = false;
-  bd.type = BodyType.STATIC;
-  bd.angle = -PI / 3.5;
-  
-  fd = new FixtureDef();
-  fd.friction = 0.3;
-  fd.density = 1.0;
-  
-  obj = new RectangleObject(gameWorld, 25, 300, bd, fd);
-  gameWorld.addObject(obj);
-  
   bd = new BodyDef(); // top right edges
   bd.position.set(gameWorld.box2d.coordPixelsToWorld(width - 20, 110));
   bd.fixedRotation = true;
