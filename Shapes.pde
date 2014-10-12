@@ -62,13 +62,14 @@ class CircleBumperObject extends CircleObject implements Bumper {
     Vec2 bv = new Vec2(v.x, v.y);
     bv = world.box2d.coordPixelsToWorld(bv);
     other.body.setLinearVelocity(bv);
+    addScore(100);
   }
 }
 
-class LineObject extends GameObject {
+class ChainObject extends GameObject {
   PVector[] vertices = null;
   
-  public LineObject(GameWorld world, PVector[] verts, BodyDef bd, FixtureDef fd) {
+  public ChainObject(GameWorld world, PVector[] verts, BodyDef bd, FixtureDef fd) {
     super(world, bd);
     
     this.vertices = verts;

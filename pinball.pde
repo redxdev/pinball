@@ -34,6 +34,7 @@ void draw() {
   background(100, 100, 100);
   updateControl(gameWorld);
   gameWorld.draw();
+  updateGame();
 }
 
 void mousePressed() {
