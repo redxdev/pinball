@@ -50,6 +50,21 @@ class CircleObject extends GameObject {
   }
 }
 
+class CircleBumperObject extends CircleObject implements Bumper {
+  public CircleBumperObject(GameWorld world, float r, BodyDef bd, FixtureDef fd) {
+    super(world, r, bd, fd);
+  }
+  
+  public void applyBump(Contact contact, GameObject other) {
+    PVector v = other.getPosition();
+    v.sub(this.getPosition());
+    v.mult(50);
+    Vec2 bv = new Vec2(v.x, v.y);
+    bv = world.box2d.coordPixelsToWorld(bv);
+    other.body.setLinearVelocity(bv);
+  }
+}
+
 class LineObject extends GameObject {
   PVector[] vertices = null;
   

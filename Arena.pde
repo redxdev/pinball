@@ -95,3 +95,18 @@ void buildArena(GameWorld gameWorld) {
   obj = new RectangleObject(gameWorld, width, 25, bd, fd);
   gameWorld.addObject(obj);
 }
+
+void buildDynamics(GameWorld world) {
+  BodyDef bd = new BodyDef(); // center bumper
+  bd.position.set(gameWorld.box2d.coordPixelsToWorld(80, 80));
+  bd.fixedRotation = true;
+  bd.bullet = false;
+  bd.type = BodyType.STATIC;
+  
+  FixtureDef fd = new FixtureDef();
+  fd.friction = 0.3;
+  fd.density = 1.0;
+  
+  GameObject obj = new CircleBumperObject(gameWorld, 30, bd, fd);
+  gameWorld.addObject(obj);
+}

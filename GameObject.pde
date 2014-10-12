@@ -62,3 +62,7 @@ public class GameWorld {
       box2d.destroyBody(obj.body);
   }
 }
+
+public interface Bumper {
+  void applyBump(Contact contact, GameObject other);
+}
