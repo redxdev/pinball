@@ -1,6 +1,7 @@
 abstract class GameObject {
   GameWorld world;
   Body body;
+  boolean draw = false;
   
   public GameObject(GameWorld world, BodyDef bd) {
     this.world = world;
@@ -9,6 +10,9 @@ abstract class GameObject {
   }
   
   public void draw() {
+    if(!draw)
+      return;
+      
     Transform transform = body.getTransform();
     Vec2 pos = world.box2d.coordWorldToPixels(transform.p);
     

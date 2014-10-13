@@ -16,6 +16,8 @@ import org.jbox2d.dynamics.Body;
 
 GameWorld gameWorld;
 
+PImage background;
+
 void setup() {
   size(800, 600);
   gameWorld = new GameWorld(this);
@@ -27,12 +29,14 @@ void setup() {
   initializeControl(gameWorld);
   
   gameWorld.box2d.world.setContactListener(new CollisionHandler());
+  
+  background = loadImage("background.jpg");
 }
 
 void draw() {
   clear();
-  background(100, 100, 100);
   updateControl(gameWorld);
+  image(background, 0, 0);
   gameWorld.draw();
   updateGame();
 }

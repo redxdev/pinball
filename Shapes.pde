@@ -78,7 +78,7 @@ class ChainObject extends GameObject {
     
     Vec2[] bVerts = new Vec2[vertices.length];
     for(int i = 0; i < vertices.length; i++) {
-      bVerts[i] = world.box2d.coordPixelsToWorld(vertices[i]);
+      bVerts[i] = world.box2d.coordPixelsToWorld(vertices[i]).add(world.box2d.coordPixelsToWorld(width, height));
     }
     
     chain.createChain(bVerts, bVerts.length);

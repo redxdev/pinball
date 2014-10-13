@@ -22,6 +22,7 @@ void initializeControl(GameWorld world) {
   fd.density = 1.0;
   
   plunger = new RectangleObject(world, 100, 10, bd, fd);
+  plunger.draw = true;
   world.addObject(plunger);
   
   bd = new BodyDef(); // ball
@@ -36,6 +37,7 @@ void initializeControl(GameWorld world) {
   fd.density = 1.0;
   
   ball = new CircleObject(world, 30, bd, fd);
+  ball.draw = true;
   world.addObject(ball);
   
   bd = new BodyDef(); // bottom left edge
@@ -64,6 +66,7 @@ void initializeControl(GameWorld world) {
   fd.density = 1.0;
   
   leftPaddle = new RectangleObject(world, 200, 15, bd, fd);
+  leftPaddle.draw = true;
   world.addObject(leftPaddle);
   
   RevoluteJointDef rjd = new RevoluteJointDef();
@@ -104,6 +107,7 @@ void initializeControl(GameWorld world) {
   fd.density = 1.0;
   
   rightPaddle = new RectangleObject(world, 200, 15, bd, fd);
+  rightPaddle.draw = true;
   world.addObject(rightPaddle);
   
   rjd = new RevoluteJointDef();

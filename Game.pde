@@ -7,10 +7,10 @@ void updateGame() {
   textSize(32);
   fill(255);
   if(gameOver) {
-    text("Game over. Final score: " + currentScore, width / 2 - 200, 100);
+    text("Game over. Final score: " + currentScore, width / 2 - 200, 80);
   }
   else {
-    text("Lives: " + lives + " - Score: " + currentScore, width / 2 - 200, 100);
+    text("Lives: " + lives + " - Score: " + currentScore, width / 2 - 200, 80);
   }
   
   if(ball.getPosition().y > height + 50) {
