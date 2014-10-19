@@ -1,7 +1,7 @@
 abstract class GameObject {
   GameWorld world;
   Body body;
-  boolean draw = false;
+  boolean draw = true;
   
   public GameObject(GameWorld world, BodyDef bd) {
     this.world = world;

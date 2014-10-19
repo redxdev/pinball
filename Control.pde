@@ -121,6 +121,21 @@ void initializeControl(GameWorld world) {
   rjd.maxMotorTorque = 999999;
   rjd.enableMotor = true;
   rightJoint = (RevoluteJoint)world.box2d.world.createJoint(rjd);
+  
+  bd = new BodyDef(); // flap
+  bd.position.set(gameWorld.box2d.coordPixelsToWorld(width - 110, 80));
+  bd.fixedRotation = false;
+  bd.bullet = false;
+  bd.type = BodyType.STATIC;
+  
+  fd = new FixtureDef();
+  fd.friction = 0.3;
+  fd.density = 0.3;
+  fd.isSensor = true;
+  
+  GameObject flap = new ProtectionObject(gameWorld, 10, 160, bd, fd);
+  flap.draw = false;
+  gameWorld.addObject(flap);
 }
 
 void updateControl(GameWorld world) {

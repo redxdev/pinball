@@ -66,6 +66,84 @@ class CircleBumperObject extends CircleObject implements Bumper {
   }
 }
 
+class LightObject extends GameObject implements Bumper {
+  float r;
+  float lightTime = -1;
+  float maxLightTime = -1;
+  int currentColor = 0;
+  int outline = 255;
+  int score = 0;
+  
+  public LightObject(GameWorld world, float r, BodyDef bd, FixtureDef fd, int score, int outline) {
+    super(world, bd);
+    
+    this.r = r;
+    this.score = score;
+    this.outline = outline;
+    
+    CircleShape shape = new CircleShape();
+    shape.m_radius = world.box2d.scalarPixelsToWorld(r);
+    
+    fd.shape = shape;
+    fd.isSensor = true;
+    body.createFixture(fd);
+  }
+  
+  public void onDraw() {
+    if(lightTime > 0) {
+      fill(lerpColor(0, currentColor, lightTime / maxLightTime));
+      lightTime--;
+    }
+    else {
+      fill(0);
+    }
+    
+    stroke(outline);
+    ellipseMode(RADIUS);
+    ellipse(0, 0, r, r);
+  }
+  
+  public void applyBump(Contact contact, GameObject other) {
+    addScore(score);
+    currentColor = color(random(50, 255), random(50, 255), random(50, 255));
+    lightTime = 60 * 2;
+    maxLightTime = 60 * 2;
+  }
+}
+
+class ProtectionObject extends GameObject implements Bumper {
+  float w;
+  float h;
+
+  public ProtectionObject(GameWorld world, float w, float h, BodyDef bd, FixtureDef fd) {
+    super(world, bd);
+    
+    this.w = w;
+    this.h = h;
+    
+    PolygonShape shape = new PolygonShape();
+    shape.setAsBox(
+      world.box2d.scalarPixelsToWorld(w / 2),
+      world.box2d.scalarPixelsToWorld(h / 2)
+    );
+    
+    fd.shape = shape;
+    body.createFixture(fd);
+  }
+  
+  public void onDraw() {
+    fill(255);
+    stroke(0);
+    rectMode(CENTER);
+    rect(0, 0, w, h);
+  }
+  
+  public void applyBump(Contact contact, GameObject other) {
+    if(other.body.getLinearVelocity().x > 0)
+      other.body.setLinearVelocity(new Vec2(-10, 0));
+  }
+}
+
 class ChainObject extends GameObject {
   PVector[] vertices = null;
   
@@ -88,7 +166,7 @@ class ChainObject extends GameObject {
   
   public void onDraw() {
     noFill();
-    stroke(0, 0, 0, 255);
+    stroke(255);
     beginShape();
     for(int i = 0; i < vertices.length; i++) {
       PVector v = vertices[i];
